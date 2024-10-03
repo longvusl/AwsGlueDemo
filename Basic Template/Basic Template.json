@@ -1,0 +1,44 @@
+{
+  "name" : "Basic Template",
+  "jobMode" : "VISUAL",
+  "description" : "",
+  "role" : "arn:aws:iam::175306137065:role/sl-de-GlueServiceRole",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-175306137065-ap-southeast-1/scripts/Basic Template.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-175306137065-ap-southeast-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "false",
+    "--enable-observability-metrics" : "true",
+    "--enable-glue-datacatalog" : "true",
+    "--enable-continuous-cloudwatch-log" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-assets-175306137065-ap-southeast-1/temporary/"
+  },
+  "connections" : {
+    "connections" : [ "Snowflake connection" ]
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 10,
+  "timeout" : 2880,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "4.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "codeGenConfigurationNodes" : "{\"node-1727857535544\":{\"S3JsonSource\":{\"AdditionalOptions\":{\"EnableSamplePath\":false,\"SamplePath\":\"s3://sl-snowflake-backup/long_demo/pokeapi_data_20240927071504.json\"},\"Exclusions\":[],\"JsonPath\":\"\",\"Multiline\":false,\"Name\":\"Amazon S3\",\"OutputSchemas\":[{\"Columns\":[{\"Name\":\"count\",\"Type\":\"int\"},{\"Name\":\"next\",\"Type\":\"string\"},{\"Name\":\"previous\",\"Type\":\"null\"},{\"Name\":\"results\",\"Type\":\"array<struct<name:string,url:string>>\"}]}],\"Paths\":[\"s3://sl-snowflake-backup/long_demo/pokeapi_data_20240927071504.json\"],\"Recurse\":true}},\"node-1727856554468\":{\"SnowflakeTarget\":{\"Data\":{\"Action\":\"append\",\"AdditionalOptions\":{},\"AutoPushdown\":true,\"Connection\":{\"Description\":\"-\",\"Label\":\"Snowflake connection\",\"Value\":\"Snowflake connection\"},\"Database\":\"dev\",\"MergeAction\":\"simple\",\"MergeClause\":\"\",\"MergeWhenMatched\":\"update\",\"MergeWhenNotMatched\":\"insert\",\"Schema\":\"dbt_long_core\",\"SelectedColumns\":[],\"SourceType\":\"table\",\"StagingTable\":\"dbt_long_core.poke_test_temp_0ffoip\",\"Table\":\"poke_test\",\"TableSchema\":[{\"Description\":\"int\",\"Label\":\"count\",\"Value\":\"count\"},{\"Description\":\"string\",\"Label\":\"next\",\"Value\":\"next\"},{\"Description\":\"VARCHAR\",\"Label\":\"previous\",\"Value\":\"previous\"},{\"Description\":\"string\",\"Label\":\"results\",\"Value\":\"results\"}],\"TempDir\":\"s3://aws-glue-assets-175306137065-ap-southeast-1/temporary/\",\"Upsert\":false},\"Inputs\":[\"node-1727857535544\"],\"Name\":\"Snowflake\"}}}",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "AwsGlueDemo",
+    "branch" : "main",
+    "folder" : "Basic Template"
+  }
+}
